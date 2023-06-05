@@ -1,0 +1,42 @@
+{
+  "name": "emoji-strip",
+  "description": "Strip emoji from a string in Node.js and browsers.",
+  "version": "1.0.1",
+  "author": "Nizar Khalife Iglesias <khalifenizar@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/khalifenizar/emoji-strip/issues"
+  },
+  "dependencies": {
+    "emoji-regex": "^6.1.3"
+  },
+  "devDependencies": {
+    "standard": "^9.0.0",
+    "tape": "^4.6.3",
+    "uglify-js": "^2.8.6",
+    "webpack": "^2.2.1"
+  },
+  "homepage": "https://github.com/khalifenizar/emoji-strip",
+  "keywords": [
+    "emoji",
+    "strip",
+    "remove",
+    "emoticons"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalifenizar/emoji-strip.git"
+  },
+  "scripts": {
+    "test": "standard && node tests/emoji-strip.js",
+    "build": "npm run browser && npm run min",
+    "browser": "webpack index.js dist/emoji-strip.js --output-library=emojiStrip --output-library-target=window",
+    "min": "uglifyjs dist/emoji-strip.js --output=dist/emoji-strip.min.js --compress --mangle"
+  },
+  "standard": {
+    "ignore": [
+      "dist/*"
+    ]
+  }
+}
