@@ -27,7 +27,7 @@ module.exports = MessageHandler = async (messages, dsan) => {
     // Antilink system
     if (
       isGroup &&
-      ActivateMod.includes(from) && groupAdmins.includes(dsan.user.id.split(':')[0] + '@s.whatsapp.net') &&
+       groupAdmins.includes(dsan.user.id.split(':')[0] + '@s.whatsapp.net') &&
       body
     ) {
       const groupCodeRegex = body.match(/chat.whatsapp.com\/(?:invite\/)?([\w\d]*)/)

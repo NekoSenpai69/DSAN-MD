@@ -48,15 +48,15 @@ async function startDsan() {
   })
 
   dsan.mods = process.env.MODS || "7047584741";
-  
+
   dsan.contactDB = dsan.DB.table('contacts')
 
-  dsan.contact = contact 
-  
-  dsan.prefix = process.env.PREFIX || '?'
- 
+  dsan.contact = contact
 
- async function readcommands(){
+  dsan.prefix = process.env.PREFIX || '?'
+
+
+  async function readcommands() {
     const cmdfile = fs
       .readdirSync("./Commands")
       .filter((file) => file.endsWith(".js"));
@@ -69,13 +69,13 @@ async function startDsan() {
   readcommands()
 
 
-  
+
   dsan.ev.on('creds.update', saveState)
 
   dsan.ev.on('connection.update', async (update) => {
 
     const { connection, lastDisconnect } = update
-    
+
 
     if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
