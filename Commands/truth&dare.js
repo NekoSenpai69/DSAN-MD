@@ -4,7 +4,7 @@ const axios = require("axios");
 
 module.exports = {
   name: "truth",
-  alias: ["t","d","dare"],
+  alias: ["t","d","dare","truth"],
   description: "Truth",
   react: "⭐",
   exp: "4",

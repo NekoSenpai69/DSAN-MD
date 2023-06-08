@@ -455,6 +455,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error)
+      m.reply("An Error Occurred!!")
     }
   }
 }

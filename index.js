@@ -5,11 +5,13 @@ const {
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeInMemoryStore,
-  useSingleFileAuthState
+  useSingleFileAuthState,
+  downloadContentFromMessage
 } = require('@adiwajshing/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db')
+const FileType = require("file-type")
 const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const { Collection } = require('discord.js')
@@ -112,7 +114,6 @@ async function startDsan() {
     res.end(dsan.QR)
   })
   dsan.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, dsan))
-
 
   dsan.ev.on('contacts.update', async (update) => await contact.saveContacts(update, dsan))
 

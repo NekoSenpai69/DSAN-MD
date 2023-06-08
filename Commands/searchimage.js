@@ -1,5 +1,6 @@
 let gis = require('async-g-i-s')
 let { getBuffer } = require("../lib/function")
+
 let nekourl = "https://long-plum-monkey-boot.cyclic.app/weeb"
 let axios = require("axios");
 let nekourl2 = "https://screenshot.kai0071.repl.co/"
@@ -152,11 +153,12 @@ Thanks to *NekoSenpai*`
             });
           }
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
     } catch (error) {
-      console.log(err);
+      console.log(error);
+      m.reply("An Error Occurred!!")
     }
   }
 } 

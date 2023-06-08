@@ -10,7 +10,9 @@ const decodeJid = (jid) => {
  * @returns {Promise<Buffer>}
  */
 
-const downloadMedia = async (message) => {
+        // save to file
+        
+ const downloadMedia = async (message) => {
     /**@type {keyof proto.IMessage} */
     let type = Object.keys(message)[0]
     let msg = message[type]
