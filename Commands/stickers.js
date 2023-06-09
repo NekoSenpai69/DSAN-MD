@@ -34,6 +34,9 @@ module.exports = {
             categories: ['🤩', '🎉'],
             quality: 70
           })
+
+
+
           await dsan.sendMessage(
             M.from,
             {

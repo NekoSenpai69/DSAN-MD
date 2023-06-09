@@ -10,7 +10,7 @@ module.exports = MessageHandler = async (messages, dsan) => {
     if (M.key && M.key.remoteJid === 'status@broadcast') return
     if (M.type === 'protocolMessage' || M.type === 'senderKeyDistributionMessage' || !M.type || M.type === '')
       return
-const antilink = process.env.ANTILINK || true
+
     const { isGroup, type, sender, from, body } = M
     const gcMeta = isGroup ? await dsan.groupMetadata(from) : ''
     const gcName = isGroup ? gcMeta.subject : ''
@@ -25,9 +25,9 @@ const antilink = process.env.ANTILINK || true
     const banned = (await dsan.DB.get('banned')) || []
 
     // Antilink system
-    if(antilink == true) {
-      if (
-      isGroup &&   groupAdmins.includes(dsan.user.id.split(':')[0] + '@s.whatsapp.net') &&
+    if (
+      isGroup &&
+       groupAdmins.includes(dsan.user.id.split(':')[0] + '@s.whatsapp.net') &&
       body
     ) {
       const groupCodeRegex = body.match(/chat.whatsapp.com\/(?:invite\/)?([\w\d]*)/)
@@ -37,12 +37,11 @@ const antilink = process.env.ANTILINK || true
 
         if (groupCode !== groupNow) {
           await dsan.sendMessage(from, { delete: M.key })
-          { await dsan.groupParticipantsUpdate(from, [sender], 'remove')
-          M.reply('Successfully removed an intruder!!!!')}
+          return await dsan.groupParticipantsUpdate(from, [sender], 'remove')
+          M.reply('Successfully removed an intruder!!!!')
         }
       }
     }
-                         }
 let sendtext = body.toLowerCase()
     if (sendtext.startsWith('hello bot')) {
       M.reply (`Hello *${M.pushName} Baby*, I Am *Dsan* Your Only *GF*. How Can I Help You?`);
