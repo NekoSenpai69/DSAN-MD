@@ -5,13 +5,11 @@ const {
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeInMemoryStore,
-  useSingleFileAuthState,
-  downloadContentFromMessage
+  useSingleFileAuthState
 } = require('@adiwajshing/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db')
-const FileType = require("file-type")
 const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const { Collection } = require('discord.js')
@@ -19,9 +17,6 @@ const qr = require("qr-image");
 const contact = require("./lib/contact.js");
 const MessageHandler = require('./CONNECTION/message');
 const MONGOURL = process.env.URL || "mongodb+srv://nekosenpai269:1234@shibam.qw9rlw0.mongodb.net/?retryWrites=true&w=majority"
-const clearState = () => {
-  fs.unlinkSync("./neko.json");
-}
 console.log(`Bot Is Running Baby`);
 const driver = new MongoDriver(MONGOURL)
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
@@ -31,7 +26,9 @@ async function startDsan() {
   let { version } = await fetchLatestBaileysVersion()
   const { state, saveState } = useSingleFileAuthState("./neko.json");
 
-
+const clearState = () => {
+  fs.unlinkSync("./neko.json");
+}
   const dsan = DsanConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
@@ -102,6 +99,7 @@ async function startDsan() {
         console.log(
           `Server Disconnected: Maybe Your WhatsApp Account got banned !`
         );
+        clearState();
       }
     }
     if (update.qr) {

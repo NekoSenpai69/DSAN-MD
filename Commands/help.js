@@ -6,9 +6,11 @@ module.exports = {
     category: 'weeb',
     exp: 15,
     description: 'Gives you news about anime',
-    async execute(dsan, arg, m) {
+    async execute(dsan,args, m) {
         try {
 await dsan.sendPresenceUpdate("composing", m.from);
+          let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
+          console.log(id)
         function readUniqueCommands(dirPath) {
           const allCommands = [];
 
